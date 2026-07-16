@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { catchAsync } from "../util/catchAsync";
+import { catchAsync } from "../../util/catchAsync";
 import { authService } from "./auth.service";
-import { sendResponse } from "../util/sendRensponse";
+import { sendResponse } from "../../util/sendRensponse";
 
 
 const loginUser = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
@@ -36,6 +36,29 @@ const loginUser = catchAsync(async (req: Request, res: Response, next: NextFunct
 
 });
 
+const refreshToken = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const refreshToken  = req.cookies.refreshToken;
+
+    const { accessToken } = await authService.refreshToken(refreshToken);
+
+    res.cookie("accessToken", accessToken, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "none",
+        maxAge: 1000 * 24 * 60 * 60,  // 1 days
+    });
+
+    sendResponse(res, {
+        success: true,
+        statuscode: 200,
+        message: "Access token refreshed successfully",
+        data: {
+            accessToken
+        },
+    });
+});
+
 export const authController = {
     loginUser
+    , refreshToken
 };

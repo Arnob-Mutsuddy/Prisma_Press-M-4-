@@ -1,0 +1,53 @@
+{
+	"info": {
+		"_postman_id": "bebf40e8-de03-41d0-8681-37a9686b563b",
+		"name": "Prisma",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "54724313",
+		"_collection_link": "https://arnobmutsuddy77-5107598.postman.co/workspace/Arnob-Mutsuddy's-Workspace~451e8bc6-e260-4e8c-84b1-031ebab48030/collection/54724313-bebf40e8-de03-41d0-8681-37a9686b563b?action=share&source=collection_link&creator=54724313"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get user",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "update profile",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
