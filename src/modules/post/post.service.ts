@@ -5,6 +5,19 @@ import { ICreatePostPayload, IPostQuery, IUpdatePostPayload } from "./post.inter
 
 
 const createPost= async(payload:ICreatePostPayload,userId:string) =>{
+        const user = await prisma.user.findUniqueOrThrow({
+        where : {
+            id : userId
+        },
+        include : {
+            subscription : true
+        }
+    })
+
+    if(payload.isPremium && user.subscription?.status !== "ACTIVE"){
+        throw new Error("You are not a premium user. So You can not create Premium content")
+    }
+
     const result = await prisma.post.create({
         data:{
             ...payload,
@@ -373,7 +386,9 @@ const getPostById= async(postId:string) =>{
             // throw new Error("fake error")
             const post = await tx.post.findUniqueOrThrow({
                 where: {
-                    id: postId
+                    id: postId,
+                    isPremium:false,
+                    
                 },
 
                 include: {
